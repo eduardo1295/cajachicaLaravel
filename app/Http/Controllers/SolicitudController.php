@@ -6,6 +6,7 @@ use App\Models\Concepto;
 use App\Models\Departamento;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateSolicitudRequest;
 
 class SolicitudController extends Controller
 {
@@ -15,7 +16,9 @@ class SolicitudController extends Controller
     public function index()
     {
         
-        $solicitud  = Solicitud::where('borradaxtda','=', 0)->where('Fecha','>=', date('d-m-y', strtotime("-90 day")))->paginate(10);
+        $solicitud  = Solicitud::where('borradaxtda','=', 0)->orderBy('IdSolicitud','desc')
+        ->limit(1500)
+        ->get();
         $concepto = Concepto::get();
         $departamento  = Departamento::get();
         return view('solicitud.index', ['solicitudes' =>  $solicitud , 'concepto' => $concepto, 'departamento' => $departamento ]);
@@ -43,7 +46,7 @@ class SolicitudController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return 'Estamos en el show' ;
     }
 
     /**
@@ -61,9 +64,10 @@ class SolicitudController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(updateSolicitudRequest $request, Solicitud $solicitud)
     {
-        //
+        $solicitud->update($request->validated());
+        return to_route('solicitud.index')->with('status', 'Solicitud Actualizada!');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\AutorizacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,4 @@ Route::get('/', function () {
 
 Route::resource('usuario', UserController::class);
 Route::resource('solicitud', SolicitudController::class);
+Route::resource('autorizacion', AutorizacionController::class);

@@ -21,7 +21,7 @@
                 
                 @foreach ($solicitudes as $key => $solicitud)
                     <tr>
-                    <td>{{ $solicitud->Serie }}</td>
+                    <td>{{ $solicitud->Serie }}_{{ $solicitud->Folio }}</td>
                     <td>{{ $solicitud->Folio }}</td>
                     <td>{{ $concepto->find($solicitud->IdConcepto)->Descripcion }}</td>
                     <td>{{ $departamento->find($solicitud->IdDepartamento)->Departamento }}</td>
@@ -41,7 +41,7 @@
               
             </tbody>
           </table>
-          {{ $solicitudes->links() }}
+          {{-- {{ $solicitudes->links() }} --}}
           {{-- {!! $users->links() !!} --}}
     </div>
 
